@@ -43,12 +43,3 @@ docker run -it --rm -p 8080:8080 ghcr.io/monfardinel/kirby-typescript:latest
 Then head to your browser and open `localhost:8080`.
 
 Use `left` and `right` arrows to move, `z` to inhale and `x` to jump.
-
-## To-do
-
-Backlog of improvements:
-
-- Switch from Kaboom to Kaplay
-- Create game state
-- Develop level 2 and maybe 3
-- Create logic for enemy guy to jump
