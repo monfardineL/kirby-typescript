@@ -51,7 +51,9 @@ jobs:
           push: true
           context: .
           file: Docker/Dockerfile
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Generate docker artifact attestation
         uses: actions/attest-build-provenance@v1
