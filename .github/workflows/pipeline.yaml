@@ -1,0 +1,45 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeScript application
+        run: npm run build
+
+      # - name: Build Docker image
+      #   run: docker build -t your-docker-image-name .
+
+      # - name: Log in to GitHub Packages
+      #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      # - name: Publish Docker image to GitHub Packages
+      #   run: docker push docker.pkg.github.com/your-username/your-repository/your-docker-image-name
